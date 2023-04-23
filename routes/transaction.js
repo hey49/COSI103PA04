@@ -85,6 +85,7 @@ router.post(
 // summarize the items by category
 router.get("/transaction/byCategory", isLoggedIn, async (req, res, next) => {
   let results = await Transaction.aggregate([
+    { $match: { userId: req.user._id } },
     {
       $group: {
         _id: "$category",

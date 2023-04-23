@@ -86,10 +86,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(layouts);
 
 app.use(pw_auth_router);
 
-app.use(layouts);
 
 app.get("/", (req, res, next) => {
   res.render("index");
