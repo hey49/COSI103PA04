@@ -1,0 +1,14 @@
+
+<form method="post" action="/transaction/updateTransaction">
+    <input type="hidden" name="transactionId" value="<%= transaction._id %>">
+    new transaction description:
+    <input type="text" value="<%= transaction.description %>" name="description"><br>
+    new transaction amount:
+    <input type="number" step="0.01" value="<%= transaction.amount %>" name="amount"><br>
+    new transaction category:
+    <input type="text" value="<%= transaction.category %>" name="category"><br>
+    new transaction date:
+    <input type="date" value="<%= transaction.date %>" name="date"><br>
+    <br>
+    <input type="submit" value="store">
+</form>

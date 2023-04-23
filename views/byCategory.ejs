@@ -1,0 +1,23 @@
+<h1>Transactions for <%= user.username %>
+</h1>
+
+<ul>
+    <li><a href="/transaction">transaction table</a></li>
+</ul>
+
+<table>
+    <thead>
+        <tr>
+            <th>category</th>
+            <th>amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% results.map(item => {%>
+            <tr>
+               <td> <%= item._id %> </td>
+               <td><%= item.total %></td>
+            </tr>
+            
+            <% }) %>
+</table>

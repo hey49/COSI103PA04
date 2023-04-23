@@ -1,0 +1,124 @@
+<h1>Transactions for <%= user.username %>
+</h1>
+
+<div class="sort-container">
+    <label>Sort by:</label>
+    <a href="?sortBy=description"><button>Description</button></a>
+    <a href="?sortBy=amount"><button>Amount</button></a>
+    <a href="?sortBy=category"><button>Category</button></a>
+    <a href="?sortBy=date"><button>Date</button></a>
+</div>
+
+<div class="sort-container">
+    <label>Group by:</label>
+    <a href="/transaction/byCategory"><button>Category</button></a>
+</div>
+
+<table id="transaction-table">
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>delete</th>
+            <th>edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% transactions.forEach(function(transaction) { %>
+            <tr>
+                <td>
+                    <%= transaction.description %>
+                </td>
+                <td>
+                    <%= transaction.amount %>
+                </td>
+                <td>
+                    <%= transaction.category %>
+                </td>
+                <td>
+                    <%= transaction.date.toDateString() %>
+                </td>
+                <td>
+                    <a href="/transaction/remove/<%=transaction._id %>">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="/transaction/edit/<%=transaction._id %>">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                </td>
+            </tr>
+            <% }); %>
+    </tbody>
+</table>
+
+<div class="form-container">
+    <h2>Create Transaction</h2>
+    <form action="/transaction" method="POST">
+        <label for="description">Description</label>
+        <input type="text" name="description" required>
+
+        <label for="amount">Amount</label>
+        <input type="number" step="0.01" name="amount" step="0.01" required>
+
+        <label for="category">Category</label>
+        <input type="text" name="category" required>
+
+        <label for="date">Date</label>
+        <input type="date" name="date" required>
+
+        <input type="submit" value="Create">
+    </form>
+</div>
+
+<script>
+    function sortTable(property) {
+        var table, rows, switching, i, x, y, shouldSwitch;
+        table = document.getElementById("transaction-table");
+        switching = true;
+        while (switching) {
+            switching = false;
+            rows = table.getElementsByTagName("tr");
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("td")[getPropertyIndex(property)];
+                y = rows[i + 1].getElementsByTagName("td")[getPropertyIndex(property)];
+                if (isNumeric(x.textContent) && isNumeric(y.textContent)) {
+                    if (parseFloat(x.textContent) > parseFloat(y.textContent)) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else {
+                    if (x.textContent.toLowerCase() > y.textContent.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+    }
+
+    function getPropertyIndex(property) {
+        var table, headers, index;
+        table = document.getElementById("transaction-table");
+        headers = table.getElementsByTagName("th");
+        for (index = 0; index < headers.length; index++) {
+            if (headers[index].textContent.toLowerCase() === property.toLowerCase()) {
+                return index;
+            }
+        }
+        return -1;
+    }
+
+    function isNumeric(str) {
+        if (typeof str != "string") return false;
+        return !isNaN(str) && !isNaN(parseFloat(str));
+    }
+</script>

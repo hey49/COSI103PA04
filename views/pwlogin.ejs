@@ -1,0 +1,111 @@
+<style>
+    body {
+        background-color: #f5f5f5;
+    }
+    
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+    }
+    
+    .col-sm-5 {
+        width: 40%;
+        margin: 10px;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0px 0px 10px #ccc;
+    }
+    
+    .col-sm-2 {
+        text-align: center;
+        font-size: 20px;
+        color: #666;
+        margin: 10px;
+    }
+    
+    input[type=text],
+    input[type=password],
+    input[type=number] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        font-size: 16px;
+    }
+    
+    input[type=submit] {
+        width: 100%;
+        background-color: #4c70af;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    input[type=submit]:hover {
+        background-color: #4669a4;
+    }
+    
+    h2 {
+        text-align: center;
+        color: #666;
+    }
+</style>
+
+<div class="row">
+      
+    <div class="col-sm-5">
+        <h2>Login</h2>
+        <form method="post" action="/login">
+            <label>Username:</label>
+            <input type="text"
+                   autocomplete="username"
+                   name="username">
+                   
+            <label>Passphrase:</label>
+            <input type="password"
+                   autocomplete="passphrase"
+                   name="passphrase">
+                   
+            <input type="submit" value="Login">
+        </form>
+    </div>
+  
+    <div class="col-sm-2">
+        <h2>OR</h2>
+    </div>
+  
+    <div class="col-sm-5">
+        <h2>Signup</h2>
+        <form method="post" action="/signup">
+            <label>Username:</label>
+            <input type="text" 
+                   autocomplete="username" 
+                   name="username">
+                   
+            <label>Password:</label>
+            <input type="password" 
+                   autocomplete="new-password" 
+                   name="passphrase">
+                   
+            <label>Confirm Password:</label>
+            <input type="password" 
+                   name="passphrase2">
+                   
+            <label>Age:</label>
+            <input type="number" 
+                   name="age">
+          
+            <input type="submit" value="Signup">
+        </form>
+    </div>
+</div>
